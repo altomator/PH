@@ -100,12 +100,12 @@ Pour exécuter le code de la leçon sur Kaggle, vous devrez :
 
 - Créer un compte sur [Kaggle](https://www.kaggle.com) (vous devrez fournir un numéro de téléphone), ou vous connecter à votre compte existant.
 - Aller sur [https://www.kaggle.com/code/davanstrien/progamming-historian-deep-learning-pt1](https://www.kaggle.com/code/davanstrien/progamming-historian-deep-learning-pt1). Les données utilisées dans cette leçon sont fournies avec ces carnets.
-- Cliquez sur le bouton "Editer" pour créer une copie du carnet.
-- Réglez l'option "Accélérateur" sur "GPU" ; vous trouverez cette option sous "Paramètres".
+- Cliquez sur le bouton "Copy&Edit" pour créer une copie du carnet.
+- Réglez l'option "Accelerator" sur "GPU" ; vous trouverez cette option dans l'onglet "Settings".
 
 {% include figure.html filename="kaggle_gpu.png" alt="Screenshot showing the Accelerator option set to GPU" caption="The Kaggle notebooks settings menu" %}
 
-- L'interface des carnets Kaggle devrait vous être familière si vous avez déjà utilisé des carnets Jupyter. Pour exécuter une cellule contenant du code, cliquez sur le bouton de la flèche pointant vers la droite ou, si la cellule est sélectionnée, utilisez "Maj + Retour".
+- L'interface des carnets Kaggle devrait vous être familière si vous avez déjà utilisé des carnets Jupyter. Pour exécuter une cellule contenant du code, cliquez sur le bouton en forme de triangle pointant vers la droite ou, si la cellule est sélectionnée, utilisez "Maj + Entrée".
 - N'oubliez pas de fermer votre session une fois que vous avez fini de travailler avec les notebooks. Vous pouvez le faire en accédant au menu déroulant "Run" en haut d'un carnet Kaggle.
 
 Kaggle dispose d'une [documentation sur l'utilisation de ses carnets](https://perma.cc/YF2N-C94Q) ainsi que de conseils sur [l'utilisation efficace des GPU](https://perma.cc/V8CZ-WZQ4).
@@ -113,7 +113,7 @@ Kaggle dispose d'une [documentation sur l'utilisation de ses carnets](https://pe
 
 ### Travailler en local 
 
-Si vous ne souhaitez pas utiliser une configuration dans le cloud, vous pouvez suivre ces [instructions de configuration locale de cette leçon](https://perma.cc/7WC9-VAC2).
+Si vous ne souhaitez pas utiliser une configuration dans le cloud, vous pouvez suivre les [instructions de configuration locale de cette leçon](https://perma.cc/7WC9-VAC2).
 
 
 
