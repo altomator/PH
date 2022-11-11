@@ -67,7 +67,7 @@ Cette leçon n'a pas pour but de :
 ## Compétences préalables suggérées
 
 - La connaissance de [Python] (https://perma.cc/HPP5-A3VR) ou d'un autre langage de programmation sera importante pour suivre ces leçons. Plus précisément, il serait bénéfique de comprendre comment utiliser les variables, l'indexation, et d'avoir une certaine familiarité avec l'utilisation de méthodes provenant de bibliothèques externes.
-- Nous supposons que vous êtes familier avec les [carnets Jupyter (*notebooks*)] (https://perma.cc/4FVJ-MUZ2), c'est-à-dire que vous savez comment exécuter le code qu'ils contiennent. Si vous n'êtes pas familier avec les carnets, vous trouverez en l'[Introduction aux carnets Jupyter](/fr/lecons/introduction-aux-carnets-jupyter-notebooks) une ressource utile en préalable à la présente leçon.
+- Nous supposons que vous êtes familier avec les [carnets Jupyter (*notebooks*)] (https://perma.cc/4FVJ-MUZ2), c'est-à-dire que vous savez comment exécuter le code qu'ils contiennent. Si vous n'êtes pas familier avec les carnets, vous trouverez en notre [Introduction aux carnets Jupyter](/fr/lecons/introduction-aux-carnets-jupyter-notebooks) une ressource utile en préalable à la présente leçon.
 - Ce tutoriel fait appel à des bibliothèques Python externes, mais il n'est pas nécessaire d'en avoir une connaissance préalable car les étapes de l'utilisation de ces bibliothèques seront expliquées au fur et à mesure de leur utilisation.
 
 
@@ -86,33 +86,36 @@ Cette leçon en deux parties est disponible sous forme de carnets (*notebooks*) 
 
 ### Exécuter les carnets 
 
-You can run the lesson notebooks in a variety of different ways. We strongly encourage you to use the 'cloud' setup instructions as opposed to setting things up locally. This is for a several reasons:
+Vous pouvez utiliser les carnets de différentes manières. Nous vous encourageons vivement à utiliser les instructions de configuration dans le cloud plutôt que de configurer un environnement local. Et ce, pour plusieurs raisons :
 
-- The setup process for using deep learning in a cloud environment _can_ be much simpler than trying to set things up locally. Many laptops and personal computers won't have this type of hardware available and the process of installing the necessary software drivers can be time consuming.
-- The code in this lesson will run much more quickly when a specific type of [Graphical Processing Unit](https://perma.cc/PW3J-BVHZ) (GPU) is available. This will allow for an interactive approach to working with models and outputs.
-- [GPUs are more energy efficient](https://doi.org/10.1109/BDCloud-SocialCom-SustainCom.2016.76) for some tasks compared to [Central Processing Units](https://perma.cc/2P2P-EL4V) (CPUs), including the type of tasks we will work with in these lessons.
+- Le processus de configuration de l'apprentissage profond dans un environnement cloud peut être beaucoup plus simple que la configuration locale. De nombreux ordinateurs portables et personnels ne disposent pas de ce type de matériel et le processus d'installation des pilotes logiciels nécessaires peut prendre beaucoup de temps.
+- Le code de cette leçon s'exécutera beaucoup plus rapidement si un type spécifique de carte graphique ([GPU](https://perma.cc/PW3J-BVHZ)) est disponible. Cela permettra une approche interactive du travail avec les modèles et leurs résultats.
+- Les GPU sont plus efficaces sur le plan [énergétique](https://doi.org/10.1109/BDCloud-SocialCom-SustainCom.2016.76) pour certaines tâches comparés aux unités centrales de traitement ([CPU](https://perma.cc/2P2P-EL4V)), y compris pour le type de tâches sur lesquelles nous allons travailler dans ces leçons.
 
 ### Kaggle
 
-[Kaggle](https://perma.cc/9H6M-PDB6) is a website which hosts datasets, runs data science competitions and provides learning resources. Kaggle also hosts Jupyter Notebooks, including notebooks with access to GPUs.
+[Kaggle](https://perma.cc/9H6M-PDB6) est un site Web qui héberge des jeux de données, organise des concours de science des données et fournit des ressources pédagogique. Kaggle héberge également des carnets Jupyter, y compris avec accès à des GPU.
 
-To run the lesson code on Kaggle you will need to:
+Pour exécuter le code de la leçon sur Kaggle, vous devrez :
 
-- Create an account on [Kaggle](https://www.kaggle.com) (you will need to provide a phone number), or log in to your existing account.
-- Go to [https://www.kaggle.com/code/davanstrien/progamming-historian-deep-learning-pt1](https://www.kaggle.com/code/davanstrien/progamming-historian-deep-learning-pt1). The data used in this lesson is provided alongside these notebooks.
-- Click on the 'Edit' button to create a copy of the notebook.
-- Set the 'Accelerator option' to 'GPU'; you will find this option under 'settings'.
+- Créer un compte sur [Kaggle](https://www.kaggle.com) (vous devrez fournir un numéro de téléphone), ou vous connecter à votre compte existant.
+- Aller sur [https://www.kaggle.com/code/davanstrien/progamming-historian-deep-learning-pt1](https://www.kaggle.com/code/davanstrien/progamming-historian-deep-learning-pt1). Les données utilisées dans cette leçon sont fournies avec ces carnets.
+- Cliquez sur le bouton "Editer" pour créer une copie du carnet.
+- Réglez l'option "Accélérateur" sur "GPU" ; vous trouverez cette option sous "Paramètres".
 
 {% include figure.html filename="kaggle_gpu.png" alt="Screenshot showing the Accelerator option set to GPU" caption="The Kaggle notebooks settings menu" %}
 
-- The interface for Kaggle notebooks should be familiar if you have used Jupyter notebooks before. To run a cell containing code you  click the right-pointing arrow button or, if the cell is selected, using 'Shift + Enter'.
-- Remember to close your session down once you have finished working with the notebooks. You can do this by accessing the 'run' drop down menu at the top of a Kaggle notebook.
+- L'interface des carnets Kaggle devrait vous être familière si vous avez déjà utilisé des carnets Jupyter. Pour exécuter une cellule contenant du code, cliquez sur le bouton de la flèche pointant vers la droite ou, si la cellule est sélectionnée, utilisez "Maj + Retour".
+- N'oubliez pas de fermer votre session une fois que vous avez fini de travailler avec les notebooks. Vous pouvez le faire en accédant au menu déroulant "Run" en haut d'un carnet Kaggle.
 
-Kaggle has further [documentation on using their notebooks](https://perma.cc/YF2N-C94Q) as well as guidance on [efficient GPU usage](https://perma.cc/V8CZ-WZQ4).
+Kaggle dispose d'une [documentation sur l'utilisation de ses carnets](https://perma.cc/YF2N-C94Q) ainsi que de conseils sur [l'utilisation efficace des GPU](https://perma.cc/V8CZ-WZQ4).
 
-### Local Setup
 
-If you don't want to use one of the cloud setup instructions you can follow [instructions for setting up this lesson locally](https://perma.cc/7WC9-VAC2).
+### Travailler en local 
+
+Si vous ne souhaitez pas utiliser une configuration dans le cloud, vous pouvez suivre ces [instructions de configuration locale de cette leçon](https://perma.cc/7WC9-VAC2).
+
+
 
 # A Quick Introduction to Machine Learning
 
