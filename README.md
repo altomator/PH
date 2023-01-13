@@ -129,46 +129,49 @@ count number spam_words in email:
 
 En revanche, une approche par apprentissage automatique entraînerait un [algorithme](https://perma.cc/PFX7-WB6J) d'apprentissage automatique  sur des exemples étiquetés de courriels qui sont des «&#xA0;spam&#xA0;» et «&#xA0;non spam&#xA0;». Cet algorithme, après une exposition répétée aux exemples, «&#xA0;apprendrait&#xA0;» des modèles qui indiquent le type de courriels. Il s'agit d'un exemple [d'«&#xA0;apprentissage supervisé&#xA0;»](https://perma.cc/TFY2-YT7A), un processus dans lequel un algorithme est exposé à des données étiquetées, et c'est ce sur quoi ce tutoriel va se concentrer. Il existe différentes approches pour gérer ce processus d'apprentissage, dont certaines seront abordées dans cette leçon. Un autre type d'apprentissage automatique qui ne nécessite pas d'exemples étiquetés est [l'«&#xA0;apprentissage non supervisé&#xA0;»](https://perma.cc/S7QE-8D3T).
 
-$$ exemple computer vision $$
+$$ ajouter un exemple computer vision ? $$
 
 L'apprentissage automatique présente des avantages et des inconvénients. Dans notre exemple de courrier électronique, il est notamment avantageux de ne pas avoir à identifier manuellement ce qui indique si un courrier électronique est un spam ou non. Cela est particulièrement utile lorsque les signaux peuvent être subtils ou difficiles à détecter. Si les caractéristiques des courriers électroniques non sollicités devaient changer à l'avenir, vous n'auriez pas besoin de réécrire l'ensemble de votre programme, mais vous pourriez réentraîner votre modèle avec de nouveaux exemples. Parmi les inconvénients, citons la nécessité de disposer d'exemples étiquetés, dont la création peut prendre beaucoup de temps. L'une des principales limites des algorithmes d'apprentissage automatique est qu'il peut être difficile de comprendre comment ils ont pris une décision, c'est-à-dire pourquoi un courriel a été étiqueté comme spam ou non. Les implications de ce phénomène varient en fonction du «&#xA0;pouvoir&#xA0;» accordé à l'algorithme dans un système. À titre d'exemple, l'impact négatif potentiel d'un algorithme qui prend des décisions automatisées concernant une demande de prêt est probablement beaucoup plus élevé que celui d'un algorithme qui fait des recommandations de contenus sur un service de streaming. 
 
 
 ## Entraînement d'un modèle de classification d'images
 
-Maintenant que nous avons une compréhension générale de l'apprentissage automatique, nous allons passer à notre premier exemple d'utilisation de l'apprentissage profond pour la vision par ordinateur. Dans cet exemple, nous allons construire un classificateur d'images qui affecte les images à l'une des deux catégories ciblées en fonction de données d'entraînement étiquetées.
+Maintenant que nous avons une compréhension générale de l'apprentissage automatique, nous allons passer à notre premier exemple d'utilisation de l'apprentissage profond pour la vision par ordinateur. Dans cet exemple, nous allons construire un classificateur d'images qui affecte les images à l'une des deux catégories ciblées, en fonction de données d'entraînement étiquetées.
 
-### The Data: Classifying Images from Historical Newspapers
+### Les données : classer des images de presse ancienne 
 
-In this two-part lesson, we will work with a dataset derived from the ["Newspaper Navigator"](https://perma.cc/8U7H-9NUS). This dataset consists of extracted visual content for 16,358,041 digitised historic newspaper pages drawn from the [Library of Congress'](https://perma.cc/8YJ6-KKFS) [Chronicling America collection](https://perma.cc/P98H-P3WS).
+Dans cette leçon, nous allons travailler avec un jeu de données dérivés du projet ["Newspaper Navigator"](https://perma.cc/8U7H-9NUS). Ce jeu de données est constitué du contenu visuel extrait de 16 358 041 pages de journaux historiques numérisés provenant de la [bibliothèque du Congrès](https://perma.cc/8YJ6-KKFS) [Chronicling America collection](https://perma.cc/P98H-P3WS).
 
-A computer vision model assigned these images one of seven categories, including photographs and advertisements.
 
-The Newspaper Navigator data was created using an [object detection](https://perma.cc/3DPY-P4A8) deep learning model. This model was trained on annotations of first world war-era Chronicling America pages, including annotations made by volunteers as part of the [Beyond Words](https://perma.cc/ZBP2-US4H) crowdsourcing project.[^6]
+Les données du projet Newspaper Navigator ont été créées à l'aide d'un modèle d'apprentissage profond pour la [détection d'objets](https://perma.cc/3DPY-P4A8). Ce modèle a été entraîné sur des pages annotées de Chronicling America datant de la Première Guerre mondiale, dont des annotations faites par les volontaires du projet de crowdsourcing [Beyond Words](https://perma.cc/ZBP2-US4H).[^6] Il a permis de classer ces images dans sept catégories, dont photographie et publicité.
 
-If you want to find out more about how this dataset was created you may want to read the [journal article](https://perma.cc/AU7E-WRU4) describing this work, or look at the [GitHub repository](https://perma.cc/CFT7-RUJR) which contains the code and training data. We won't be replicating this model. Instead, we will use the output of this model as the starting point for creating the data we use in this tutorial. Since the data from Newspaper Navigator is predicted by a machine learning model it will contain errors; for now, we will accept that the data we are working with is imperfect. A degree of imperfection and error is often the price we have to pay if we want to work with collections 'at scale' using computational methods.
+Si vous souhaitez en savoir plus sur la façon dont cet ensemble de données a été créé, reportez-vous à l'[article](https://perma.cc/AU7E-WRU4) qui décrit ce travail, ou consulter le [dépôt GitHub](https://perma.cc/CFT7-RUJR) qui contient le code et les données d'entraînement. Nous ne reproduirons pas ce modèle. Nous allons plutôt utiliser la sortie de ce modèle comme point de départ pour créer les données que nous utilisons dans ce tutoriel. Puisque les données du Newspaper Navigator sont prédites par un modèle d'apprentissage automatique, elles contiendront des erreurs ; pour l'instant, nous accepterons que les données avec lesquelles nous travaillons soient imparfaites. Un certain degré d'imperfection et d'erreur est souvent le prix à payer si nous voulons travailler avec des collections "à l'échelle" en utilisant des méthodes informatiques.
 
-### Classifying Newspaper Advertisements
 
-For our first application of deep learning, we'll focus on classifying images predicted as adverts (remember this data is based on predictions and will contain some errors). More specifically, we'll work with a sample of images in adverts covering the years 1880-5.
+### Classer des publicités
 
-#### Detecting if Advertisements Contain Illustrations
+Pour notre première application de l'apprentissage profond, nous allons nous concentrer sur la classification d'images prédites comme des publicités (n'oubliez pas que ces données sont basées sur des prédictions et qu'elles contiendront quelques erreurs). Plus précisément, nous allons travailler avec un échantillon de publicités couvrant les années 1880-1885.
 
-If you look through the advert images, you will see that some of the adverts contain only text, whilst others have some kind of illustration.
 
-An advert with an illustration[^7]:
+#### Détecter si les publicités contiennent des illustrations
 
-{% include figure.html filename="illustrated_ad.jpg" alt="A black and white image of a newspaper advert. The image contains an illustration of a coffee tin on the left of the advert." caption="An example of an illustrated advert" %}
+Si vous regardez les images des publicités, vous verrez que certaines d'entre elles ne contiennent que du texte, tandis que d'autres comportent une sorte d'illustration.
 
-An advert without an illustration[^8]:
+Une publicité illustrée [^7] :
 
-{% include figure.html filename="non_illustrated_ad.jpg" alt="A black and white image of a newspaper advert. The advert contains text only. The advert is for fire insurance, with the address listed for the insurance company" caption="An example of a text only advert" %}
+{% include figure.html filename="illustrated_ad.jpg" alt="Une image en noir et blanc d'une publicité de journal. L'image contient une illustration d'une boîte à café sur la gauche de l'annonce." caption="Un exemple de publicité illustrée" %}
 
-Our classifier will be trained to predict which category an advert image belongs. We might use this to help automate finding adverts with images for further 'manual' analysis. Alternatively, we may use this classifier more directly to quantify how many adverts contained illustrations in a given year and discover whether this number changed over time, along with how it was influenced by other factors such as the place of publication. The intended use of your model will impact the labels you choose to train it on and how you choose to assess whether a model is performing sufficiently well. We'll dig into these issues further as we move through this two-part lesson.
+Une annonce textuelle [^8]:
 
-## An Introduction to the fastai Library
+{% include figure.html filename="non_illustrated_ad.jpg" alt="Une image en noir et blanc d'une publicité de journal. La publicité ne contient que du texte et concerne une assurance incendie, avec l'adresse de la compagnie d'assurance." caption="Un exemple de publicité sans illustration" %}
 
-[fastai](https://perma.cc/EG22-5FGB) is a Python library for deep learning "which provides practitioners with high-level components that can quickly and easily provide state-of-the-art results in standard deep learning domains, and provides researchers with low-level components that can be mixed and matched to build new approaches"[^9]. The library is developed by [fast.ai](https://perma.cc/FY9M-LJMG) (notice the dot!), a research organisation that aims to make deep learning more accessible. Alongside the fastai library, fast.ai also organises free courses and carries out research.
+Notre classificateur sera entraîné à prédire à quelle catégorie appartient une publicité. Nous pourrions l'utiliser pour automatiser la recherche de publicités comportant des illustrations en vue d'une analyse «&#xA0;manuelle&#xA0;» plus poussée. Nous pourrions également utiliser ce classificateur plus directement pour quantifier le nombre d'annonces contenant des illustrations au cours d'une année donnée et découvrir si ce nombre a évolué dans le temps, ainsi que l'influence d'autres facteurs tels que le lieu de publication. L'utilisation prévue de votre modèle aura un impact sur les étiquettes sur lesquelles vous choisissez de l'entraîner et sur la manière dont vous choisissez d'évaluer si un modèle est suffisamment performant. Nous approfondirons ces questions au fil de cette leçon en deux parties.
+
+## Introduction à la bibliothèque fastai
+
+[fastai](https://perma.cc/EG22-5FGB) est une bibliothèque Python pour l'apprentissage profond «&#xA0;qui fournit aux praticiens des composants de haut niveau pouvent rapidement et facilement fournir des résultats de pointe dans des domaines d'apprentissage profond standard, et fournit aux chercheurs des composants de bas niveau qui peuvent être assemblés et assortis pour construire de nouvelles approches&#xA0;» [^9]. La bibliothèque est développée par [fast.ai](https://perma.cc/FY9M-LJMG), un organisme de recherche qui vise à rendre l'apprentissage profond plus accessible. Outre la bibliothèque fastai, fast.ai organise également des cours gratuits et mène des recherches.
+
+
 
 There are a few reasons why fastai was chosen for this tutorial:
 
