@@ -171,35 +171,35 @@ Notre classificateur sera entraîné à prédire à quelle catégorie appartient
 
 [fastai](https://perma.cc/EG22-5FGB) est une bibliothèque Python pour l'apprentissage profond «&#xA0;qui fournit aux praticiens des composants de haut niveau pouvent rapidement et facilement fournir des résultats de pointe dans des domaines d'apprentissage profond standard, et fournit aux chercheurs des composants de bas niveau qui peuvent être assemblés et assortis pour construire de nouvelles approches&#xA0;» [^9]. La bibliothèque est développée par [fast.ai](https://perma.cc/FY9M-LJMG), un organisme de recherche qui vise à rendre l'apprentissage profond plus accessible. Outre la bibliothèque fastai, fast.ai organise également des cours gratuits et mène des recherches.
 
+La bibliothèque fastai a été choisie pour ce tutoriel pour plusieurs raisons :
 
-
-There are a few reasons why fastai was chosen for this tutorial:
-
-- It is focused on making deep learning accessible, particularly through the design of library's API. 
-- It facilitates the use of techniques that don't require a large amount of data or computational resources.
-- Many best practices are implemented as 'defaults', helping achieve good results.
-- There are different levels at which you can interact with the library depending on how much you need to change lower-level details.
-- The library sits on top of [PyTorch](https://perma.cc/U5US-FLSV) which makes it relatively simple to use existing code.
+- Elle s'attache à rendre l'apprentissage profond accessible, notamment par la conception de l'API de la bibliothèque. 
+- Elle facilite l'utilisation de techniques qui ne nécessitent pas une grande quantité de données ou de ressources de calcul.
+- De nombreuses bonnes pratiques sont mises en œuvre par "défaut", ce qui permet d'obtenir de bons résultats.
+- Il existe différents niveaux d'interaction avec la bibliothèque, en fonction de l'importance des modifications à apporter aux détails de niveau inférieur.
+- La bibliothèque s'appuie sur [PyTorch](https://perma.cc/U5US-FLSV), ce qui facilite l'utilisation du code existant.
 
 Although this tutorial focuses on fastai, many of the techniques shown are applicable across other frameworks too.
 
-### Creating an Image Classifier in fastai
+Bien que ce tutoriel se concentre sur fastai, de nombreuses techniques présentées sont également applicables à d'autres frameworks IA.
 
-The next section will outline the steps involved in creating and training a classification model to predict whether an advert is text-only or also contains an illustration. Briefly, the steps will be:
+### Creéer un classifieur d'images avec fastai
 
-1. Load the data
-2. Create a model
-3. Train the model
+La section suivante décrit les étapes de la création et de l'apprentissage d'un modèle de classification permettant de prédire si une publicité est composée uniquement de texte ou contient également une illustration. Brièvement, les étapes seront les suivantes :
 
-These steps will be covered fairly quickly; don't worry if you feel you are not following everything in this section, the lesson will get back to what is happening in more detail when we get to the [the workflow of a computer vision problem section](#the-workflow-of-a-supervised-computer-vision-problem).
+1. Charger les données
+2. Créer un modèle
+3. Entraîner le modèle
 
-The first thing we'll do is import the required modules from the fastai library. In this case, we import `vision.all` since we are working on a computer vision task.[^10]
+Ces étapes seront abordées assez rapidement ; ne vous inquiétez pas si vous avez l'impression de ne pas tout suivre dans cette section, la leçon reviendra sur ce qui se passe de manière plus détaillée lorsque nous arriverons à la section [le flux de travail d'un problème de vision par ordinateur](#the-workflow-of-a-supervised-computer-vision-problem).
+
+La première chose que nous allons faire est d'importer les modules nécessaires de la bibliothèque fastai. Dans ce cas, nous importons `vision.all` puisque nous travaillons sur une tâche de vision par ordinateur.[^10]
 
 ```python
 from fastai.vision.all import *
 ```
+Nous importons également [Matplotlib](https://perma.cc/AX3V-X4EC), une bibliothèque permettant de créer des visualisations en Python. Nous demanderons à Matplotlib d'utiliser un autre [style](https://perma.cc/37DF-7WKS) en utilisant la méthode `style.use`.
 
-We will also import [Matplotlib](https://perma.cc/AX3V-X4EC), a library for creating visualisations in Python. We will ask Matplotlib to use a different [style](https://perma.cc/37DF-7WKS) using the `style.use` method.
 
 ```python
 %matplotlib inline
@@ -207,9 +207,9 @@ import matplotlib.pyplot as plt
 plt.style.use('seaborn')
 ```
 
-## Loading the Data
+## Charger les données 
 
-There are a number of ways in which data can be loaded using the fastai library. The advert data consists of a folder which contains the image files, and a CSV file which contains a column with paths to the images, and the associated label:
+Les données peuvent être chargées de plusieurs façons à l'aide de la bibliothèque `fastai`. Les données des publicités consistent en un dossier qui contient les fichiers image, et un fichier CSV qui contient une colonne avec les chemins vers les images, ainsi que l'étiquette associée :
 
 <div class="table-wrapper" markdown="block">
   
