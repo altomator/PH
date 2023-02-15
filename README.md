@@ -219,56 +219,57 @@ Les données peuvent être chargées de plusieurs façons à l'aide de la biblio
   
 </div>
 
-There are various ways in which we could load this type of data using `fastai`. In this example we'll use `ImageDataLoaders.from_csv`. As the name suggests the `from_csv` method of `ImagDataLoaders` loads data from a CSV file. We need to tell fastai a few things about how to load the data to use this method:
+Il existe plusieurs façons de charger ce type de données en utilisant `fastai`. Dans cet exemple, nous allons utiliser `ImageDataLoaders.from_csv`. Comme son nom l'indique, la méthode `from_csv` de `ImagDataLoaders` charge les données depuis un fichier CSV. Nous devons préciser à fastai comment charger les données lorsque l'on utilise cette méthode :
 
-- The path to the folder where images and CSV file are stored
-- The coloumns in the CSV file which contain the labels
-- One 'item transform' `Resize()` to resize all the images to a standard size
+- Le chemin vers le dossier où les images et le fichier CSV sont stockés.
+- Les colonnes dans le fichier CSV qui contiennent les étiquettes.
+- Un 'item transform' `Resize()` pour redimensionner toutes les images à une taille standard.
 
-We'll create a variable `ad_data` which will be used to store the paramaters for how to load this data:
+Nous allons créer une variable `ad_data` qui sera utilisée pour stocker les paramètres de chargement de ces données :
 
 ```python
 ad_data = ImageDataLoaders.from_csv(
-    path="ads_data/",  # root path to csv file and image directory
-    csv_fname="ads_upsampled.csv/",  # the name of our csv file
-    folder="images/",  # the folder where our images are stored
-    fn_col="file",  # the file column in our csv
-    label_col="label",  # the label column in our csv
-    item_tfms=Resize(224, ResizeMethod.Squish),  # resize imagesby squishing so they are 224x224 pixels
-    seed=42,  # set a fixed seed to make results more reproducible
+    path="ads_data/",  # chemin vers le dossier des fichiers CSV et images
+    csv_fname="ads_upsampled.csv/",  # le nom de notre fichier CSV 
+    folder="images/",  # le dossier où nos images sont stockées
+    fn_col="file",  # la colonne 'fichier' dans notre CSV 
+    label_col="label",  # la colonne 'étiquette' dans notre CSV
+    item_tfms=Resize(224, ResizeMethod.Squish),  # redimensionnement des images à 224x224 pixels
+    seed=42,  # choix d'une valeur de graine fixe pour rendre les résultats plus reproductibles
 )
 ```
 
-It is important to make sure that data has been loaded correctly. One way to check this quickly is to use `show_batch()` method on our data. This will display the images and the associated labels for a sample of our data. The examples you get back will be slightly different to those here.
+Il est important de s'assurer que les données ont été chargées correctement. Une façon de le vérifier rapidement est d'utiliser la méthode `show_batch()` sur nos données. Cela va afficher les images et les étiquettes associées pour un échantillon de nos données. Les exemples que vous recevrez en retour seront légèrement différents de ceux présentés ici.
 
 ```python
 ad_data.show_batch()
 ```
 
-{% include figure.html filename="show_batch_1.png" alt="The output of show batch. The output is a 3x3 grid of images of newspaper advertisements with labels above them indicating if the advertisement is 'illustrated' or 'text-only'" caption="The output of 'show_batch'" %}
+{% include figure.html filename="show_batch_1.png" alt="La sortie de show batch. Le résultat est une grille 3x3 d'images de publicités de journaux avec des étiquettes indiquant si les publicités sont 'illustrées' ou textuelles" caption="La sortie de 'show_batch'" %}
 
-This is a useful way of checking that your labels and data have been loaded correctly. You can see here that the labels (`text-only` and `illustration`) have been associated correctly with how we want to classify these images. 
+C'est un moyen utile de vérifier que vos étiquettes et vos données ont été chargées correctement. Vous pouvez voir ici que les étiquettes (`text-only` et `illustration`) ont été associées conformément à la façon dont nous voulons classer ces images. 
 
-## Creating the Model
 
-Now that fastai knows how to load the data, the next step is to create a model with it. To create a model suitable for computer vision we will use the `cnn_learner` function. This function will create a ['Convolutional Neural Network'](https://perma.cc/UH8L-L6MR), a type of deep learning model often used for computer vision applications. To use this function you need to pass (at a minimum):
+## Créer le modèle
 
-- The data the model will use as training data
-- The type of model you want to use
+Maintenant que fastai sait comment charger les données, l'étape suivante est de créer un modèle avec celles-ci. Pour créer un modèle adapté à la vision par ordinateur, nous allons utiliser la fonction `cnn_learner`. Cette fonction va créer un ['Convolutional Neural Network'](https://perma.cc/UH8L-L6MR), un type de modèle d'apprentissage profond souvent utilisé pour les applications de vision par ordinateur. Pour utiliser cette fonction, vous devez passer (au minimum) :
 
-This is already sufficient for creating a computer vision model in fastai, but you may also want to pass some metrics to track during training. This allows you to get a better sense of how well your model is performing the task you are training it on. In this example, we'll use `accuracy` as the metric.
+- Les données que le modèle utilisera comme données d'entraînement
+- Le type de modèle que nous souhaitons utiliser
 
-Let's create this model and assign it to a new variable `learn`:
+C'est suffisant pour créer un modèle de vision par ordinateur avec fastai, mais vous pouvez aussi vouloir passer certaines métriques à suivre pendant l'entraînement. Cela vous permettra d'avoir une meilleure idée de la façon dont votre modèle effectue la tâche sur laquelle vous l'entraînez. Dans cet exemple, nous allons utiliser `accuracy` comme métrique.
+
+Créons ce modèle et assignons-le à une nouvelle variable `learn` :
 
 ```python
 learn = cnn_learner(
-    ad_data,  # the data the model will be trained on
-    resnet18,  # the type of model we want to use
-    metrics=accuracy,  # the metrics to track
+    ad_data,  # les données sur lesquelles le modèle sera entraîné
+    resnet18,  # le type de modèle cible
+    metrics=accuracy,  # la métrique à suivre
 )
 ```
 
-### Training the Model
+### Entraîner le modèle
 
 Although we have created a `cnn_learner` model, we haven't actually trained the model yet. This is done using the `fit` method. Training is the process which allows the computer vision model to 'learn' how to predict the correct labels for the data. There are different ways we can train (fit) this model. To start with, we'll use the `fine_tune` method. In this example the only thing we'll pass to the fine tune method is the number of epochs to train for. Each pass through the entire dataset is an 'epoch'. The amount of time the model takes to train will depend on where you are running this code and the resources available. Again, we will cover the details of all of these components below.
 
