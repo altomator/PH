@@ -252,7 +252,7 @@ C'est un moyen utile de vérifier que vos étiquettes et vos données ont été 
 
 ## Créer le modèle
 
-Maintenant que fastai sait comment charger les données, l'étape suivante est de créer un modèle avec celles-ci. Pour créer un modèle adapté à la vision par ordinateur, nous allons utiliser la fonction `cnn_learner`. Cette fonction va créer un ['Convolutional Neural Network'](https://perma.cc/UH8L-L6MR), un type de modèle d'apprentissage profond souvent utilisé pour les applications de vision par ordinateur. Pour utiliser cette fonction, vous devez passer (au minimum) :
+Maintenant que fastai sait comment charger les données, l'étape suivante consiste à créer un modèle avec celles-ci. Pour créer un modèle adapté à la vision par ordinateur, nous allons utiliser la fonction `cnn_learner`. Cette fonction va créer un ['Convolutional Neural Network'](https://perma.cc/UH8L-L6MR), un type de modèle d'apprentissage profond souvent utilisé pour les applications de vision par ordinateur. Pour utiliser cette fonction, vous devez passer (au minimum) :
 
 - Les données que le modèle utilisera comme données d'entraînement
 - Le type de modèle que nous souhaitons utiliser
@@ -271,7 +271,9 @@ learn = cnn_learner(
 
 ### Entraîner le modèle
 
-Although we have created a `cnn_learner` model, we haven't actually trained the model yet. This is done using the `fit` method. Training is the process which allows the computer vision model to 'learn' how to predict the correct labels for the data. There are different ways we can train (fit) this model. To start with, we'll use the `fine_tune` method. In this example the only thing we'll pass to the fine tune method is the number of epochs to train for. Each pass through the entire dataset is an 'epoch'. The amount of time the model takes to train will depend on where you are running this code and the resources available. Again, we will cover the details of all of these components below.
+Bien que nous ayons créé un modèle `cnn_learner`, nous n'avons pas encore entraîné le modèle. Ceci est fait en utilisant la méthode `fit`. L'entraînement est le processus qui permet au modèle de vision par ordinateur d'apprendre à prédire les étiquettes correctes pour les données. Il existe différentes façons d'entraîner (ajuster) ce modèle. Pour commencer, nous allons utiliser la méthode `fine_tune`. Dans cet exemple, la seule chose que nous allons passer à la méthode est le nombre d'époques (*epoch*) pour s'entraîner. Chaque passage à travers le jeu de données complet est une epoch. Le temps d'entraînement du modèle dépendra du contexte d'exécution de ce code et des ressources disponibles.  Nous traiteron en détail de  ces éléments ci-après.
+
+
 
 ```python
 learn.fine_tune(5)
@@ -347,11 +349,15 @@ learn.fine_tune(5)
   </tbody>
 </table>
 
-When you run this method you will see a progress bar showing how long the model has been training and the estimated time remaining. You will also see a table which displays some other information about the model, such as our tracked accuracy metric. You can see that in this example we got an accuracy greater than 90%. When you run the code yourself, the score you get may be be slightly different.
+Lorsque vous exécutez cette méthode, vous verrez une barre de progression indiquant la durée de l'entraînement du modèle et le temps restant estimé. Vous verrez également un tableau qui affiche d'autres informations sur le modèle, comme la métrique de précision que nous avons suivie. Vous pouvez voir que dans cet exemple, nous avons obtenu une précision supérieure à 90 %. Si vous exécutez le code vous-même, le score obtenu peut être légèrement différent.
 
-## Results
+
+## Résultats
 
 While deep learning techniques are commonly perceived as needing large amounts of data and extensive computing power, our example shows that for many applications smaller datasets suffice. In this example, we could have potentially used other approaches; the aim here was not to show the best solution with this particular dataset but to give a sense of what is possible with a limited number of labeled examples.
+
+Alors que les techniques d'apprentissage profond sont généralement perçues comme nécessitant de grandes quantités de données et une puissance de calcul importante, notre exemple montre que pour de nombreuses applications, des ensembles de données de petite taille suffisent. Dans cet exemple, nous aurions pu utiliser d'autres approches ; le but n'était pas de montrer la meilleure solution avec ce jeu de données particulier, mais de donner une idée de ce qui est possible lorsque l'on dispose d'un nombre limité d'exemples étiquetés.
+
 
 # An In-Depth Guide to Computer Vision using Deep Learning
 
