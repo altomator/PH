@@ -356,10 +356,8 @@ Lorsque vous exécutez cette méthode, vous verrez une barre de progression indi
 
 ## Résultats
 
-While deep learning techniques are commonly perceived as needing large amounts of data and extensive computing power, our example shows that for many applications smaller datasets suffice. In this example, we could have potentially used other approaches; the aim here was not to show the best solution with this particular dataset but to give a sense of what is possible with a limited number of labeled examples.
 
-Alors que les techniques d'apprentissage profond sont généralement perçues comme nécessitant de grandes quantités de données et une puissance de calcul importante, notre exemple montre que pour de nombreuses applications, des ensembles de données de petite taille suffisent. Dans cet exemple, nous aurions pu utiliser d'autres approches ; le but n'était pas de montrer la meilleure solution avec ce jeu de données particulier, mais de donner une idée de ce qui est possible lorsque l'on dispose d'un nombre limité d'exemples étiquetés.
-
+Alors que les techniques d'apprentissage profond sont généralement perçues comme nécessitant de grandes quantités de données et une puissance de calcul importante, notre exemple montre que pour de nombreuses applications, des ensembles de données plus petits suffisent. Dans cet exemple, nous aurions pu utiliser d'autres approches ; l'objectif n'était pas de montrer la meilleure solution avec cet ensemble de données particulier, mais de donner une idée de ce qui est possible de faire avec un nombre limité d'exemples étiquetés.
 
 # An In-Depth Guide to Computer Vision using Deep Learning
 
