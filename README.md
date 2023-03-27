@@ -392,17 +392,19 @@ Pour ce qui est des entrées, nous disposons d'images et d'étiquettes. Bien que
 
 ### Combien de données ?
 
-It is often believed that you need huge amounts of data to train a useful deep learning model, however, this is not always the case. We assume that if you are trying to use deep learning to solve a problem, you have enough data to justify not using a manual approach. The real problem is the amount of labelled data you have. It is not possible to give a definitive answer to "how much data?", since the amount of training data required is dependent on a broad range of factors. There are a number of things which can be done to reduce the amount of training data required, some of which we will cover in this lesson.
+On croit souvent qu'il faut d'énormes quantités de données pour entraîner un modèle d'apprentissage profond exploitable, mais ce n'est pas toujours le cas. Nous supposons que si vous essayez d'utiliser l'apprentissage profond pour résoudre un problème, vous disposez de suffisamment de données pour justifier de ne pas utiliser une approche manuelle. Le vrai problème est la quantité de données étiquetées dont vous disposez. Il n'est pas possible de donner une réponse définitive à la question "combien de données ?", car cette quantité requise dépend d'un large éventail de facteurs. Un certain nombre de mesures peuvent être prises pour réduire la quantité de données d'entraînement nécessaire, dont certaines seront abordées dans cette leçon.
 
-The best approach will likely be to create some initial training data and see how well your model does on it. This will give you a sense of whether a problem is possible to tackle. Furthermore, the process of annotating your data is valuable in itself. For a simple classification task, it might be possible to begin assessing whether a model is worth developing with a few hundred labelled examples (though you will often need more than this to train a robust model).
+La meilleure approche consistera probablement à créer des données d'entraînement initiales et à évaluer les performances de votre modèle sur ces données. Vous saurez ainsi s'il est possible de s'attaquer à ce problème particulier. En outre, le processus d'annotation de vos données est précieux en soi. Pour une tâche de classification simple, il est possible de commencer à évaluer si un modèle vaut la peine d'être développé avec quelques centaines d'exemples étiquetés (bien que vous ayez souvent besoin de plus que cela pour entraîner un modèle robuste).
 
-### Preparing Mini Batches
 
-When we use deep learning, it is usually not possible to pass all of our data into the model in one go. Instead, data is split into batches. When using a GPU, data is loaded into GPU memory one batch at a time. The size of this batch can impact the training process but is more often determined by the computational resources you have available.
+### Préparer des mini-lots 
 
-The reason we use a GPU for training our model is that it will almost always be quicker to train a model on a GPU compared to a CPU due to its ability to perform many calculations in parallel. 
+Lorsque nous utilisons l'apprentissage profond, il n'est généralement pas possible de passer toutes nos données dans le modèle en une seule fois. Au lieu de cela, les données sont divisées en lots. Lorsqu'on utilise un GPU, les données sont chargées dans la mémoire du GPU un lot à la fois. La taille de ce lot peut avoir un impact sur le processus d'apprentissage, mais elle est le plus souvent déterminée par les ressources informatiques dont vous disposez.
 
-Before we can create a batch and load it onto the GPU, we usually need to make sure the images are all the same size. This allows the GPU to run operations effectively. Once a batch has been prepared, we may want to do some additional transformations on our images to reduce the amount of training data required.
+La raison pour laquelle nous utilisons un GPU pour entraîner notre modèle est qu'il sera presque toujours plus rapide d'entraîner un modèle sur un GPU que sur un CPU en raison de sa capacité à effectuer de nombreux calculs en parallèle. 
+
+Avant de créer un lot et de le charger sur le GPU, nous devons généralement nous assurer que les images ont toutes la même taille. Cela permet au GPU d'exécuter les opérations de manière efficace. Une fois qu'un lot a été préparé, nous pouvons vouloir effectuer quelques transformations supplémentaires sur nos images afin de réduire la quantité de données d'entraînement nécessaires.
+
 
 ## Creating a Model
 
