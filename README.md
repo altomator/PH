@@ -475,9 +475,9 @@ If something 'breaks', don't worry! You can return to the original notebook to g
 
 Dans cette leçon, nous avons :
 
-- donné un aperçu général de la distinction entre les approches basées sur les règles et les approches basées sur l'apprentissage machine pour aborder un problème.
-- montré un exemple de base sur la façon d'utiliser fastai pour créer un classifieur d'images avec relativement peu de temps et de données d'apprentissage.
-- présenté une vue d'ensemble des étapes d'un pipeline d'apprentissage profond et identifié les étapes de ce pipeline où les chercheurs en sciences humaines devraient porter une attention particulière.
+- donné un aperçu général de la distinction entre les approches basées sur les règles et les approches basées sur l'apprentissage machine pour aborder un problème,
+- montré un exemple de base sur la façon d'utiliser fastai pour créer un classifieur d'images avec relativement peu de temps et de données d'apprentissage,
+- présenté une vue d'ensemble des étapes d'un pipeline d'apprentissage profond et identifié les étapes de ce pipeline où les chercheurs en sciences humaines devraient porter une attention particulière,
 - réaliser une expérience rudimentaire pour essayer de vérifier si l'apprentissage par transfert est utile pour notre classifieur.
 
 Dans la prochaine partie de cette leçon, nous nous appuierons sur ces fondamentaux et entrerons dans plus de détails.
@@ -582,7 +582,8 @@ learn.validate()
     (#2) [0.04488467052578926,0.9800000190734863]
 ```
 
-We see that there is a fairly big difference between the two models' performance. We kept everything the same except the `pretrained`flag, which we set to `False`. This flag determines if the model starts from the weights learned from training on ImageNet or starts from 'random' weights.[^12] This doesn't conclusively prove that transfer learning works, but it does suggest a sensible default for us to use.
+Nous constatons qu'il existe une assez grande différence entre les performances des deux modèles. Nous avons conservé le même contexte excepté le drapeau `pretrained`, que nous avons positionné à `False`. Ce drapeau détermine si le modèle démarre à partir des poids appris lors de l'entraînement sur ImageNet ou à partir de poids "aléatoires"[^12]. Cela ne prouve pas de manière concluante que l'apprentissage par transfert fonctionne, mais cela suggère une qu'il est raisonnable de l'utiliser par défaut.
+
 
 # Notes
 
