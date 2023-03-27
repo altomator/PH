@@ -273,7 +273,7 @@ learn = cnn_learner(
 
 ### Entraîner le modèle
 
-Bien que nous ayons créé un modèle `cnn_learner`, nous n'avons pas encore entraîné le modèle. Ceci est fait en utilisant la méthode `fit`. L'entraînement est le processus qui permet au modèle de vision par ordinateur d'apprendre à prédire les étiquettes correctes pour les données. Il existe différentes façons d'entraîner (ajuster) ce modèle. Pour commencer, nous allons utiliser la méthode `fine_tune`. Dans cet exemple, la seule chose que nous allons passer à la méthode est le nombre d'époques (*epoch*) pour s'entraîner. Chaque passage à travers le jeu de données complet est une epoch. Le temps d'entraînement du modèle dépendra du contexte d'exécution de ce code et des ressources disponibles.  Nous traiteron en détail de  ces éléments ci-après.
+Bien que nous ayons créé un modèle `cnn_learner`, nous n'avons pas encore entraîné le modèle. Ceci est fait en utilisant la méthode `fit`. L'entraînement est le processus qui permet au modèle de vision par ordinateur d'apprendre à prédire les étiquettes correctes pour les données. Il existe différentes façons d'entraîner (ajuster) ce modèle. Pour commencer, nous allons utiliser la méthode `fine_tune`. Dans cet exemple, la seule chose que nous allons passer à la méthode est le nombre d'époques (*epoch*) pour s'entraîner. Chaque passage à travers le jeu de données complet est une epoch. Le temps d'entraînement du modèle dépendra du contexte d'exécution de ce code et des ressources disponibles.  Nous traiterons en détail de  ces éléments ci-après.
 
 
 
@@ -363,9 +363,7 @@ Alors que les techniques d'apprentissage profond sont généralement perçues co
 
 Maintenant que nous avons une vue d'ensemble du processus, entrons dans les détails de son fonctionnement.
 
-## Le flux d'un problème de vision par ordinateur supervisé
-
-This section will start to dig into some of the steps involved in the process of creating a deep learning based computer vision model. This process involves a range of steps, only some of which are directly about training models. A high-level illustration of a supervised machine learning pipeline might look like this:
+## Le flux de travail d'un problème de vision par ordinateur supervisé
 
 Cette section commence par examiner certaines des étapes du processus de création d'un modèle de vision par ordinateur basé sur l'apprentissage profond. Ce processus implique une série d'étapes, dont certaines seulement concernent directement l'entraînement des modèles. Une illustration générale d'un pipeline d'apprentissage machine supervisé pourrait ressembler à ceci :
 
@@ -379,19 +377,20 @@ Une fois qu'un modèle a atteint un score satisfaisant, ses résultats peuvent �
 
 ## Entraîner un modèle
 
-Zooming in on the deep learning part of the workflow, what does the training process look like?
+En zoomant sur la partie du flux de travail relative à l'apprentissage profond, à quoi ressemble le processus d'entraînement ?
 
-{% include figure.html filename="training-loop.jpg" alt="A diagram showing a workflow of training a deep learning model. The pipeline contains two boxes, 'prepare training batch' and 'model training'. An arrow moves across these two boxes to a free standing box with the text 'metrics' inside. Inside the 'prepare' training batch' is a workflow showing an image and a label going through a transform, and then put in a batch. Following this under the 'model training' heading' the workflow moves through a model, predictions, and a loss. This workflow has an arrow indicating it is repeated. This workflow also flows to the metrics box"  caption="The deep learning training loop" %}
+{% include figure.html filename="training-loop.jpg" alt="Un diagramme montrant un flux de travail pour entraîner un modèle d'apprentissage profond. Le pipeline contient deux cases, 'préparer le lot d'entraînement' et 'entraînement du modèle'. Une flèche traverse ces deux boîtes jusqu'à une boîte  contenant le texte 'métriques'. Dans la case 'préparer le lot d'entraînement' se trouve un flux de travail montrant une image et une étiquette passant par une transformation, puis placées dans un lot. Ensuite, sous le titre 'entraînement du modèle', le flux de travail passe par un modèle, des prédictions et une valeur de perte. Ce flux comporte une flèche indiquant qu'il est répété. Il s'écoule également vers la boîte 'métriques'." caption="La boucle d'entraînement du deep learning" %}
 
-A high-level summary of the training loop for supervised learning: start with some images and labels, do some preparation to make the input suitable for a deep learning model, pass the data through the model, make predictions for the labels, calculate how wrong the predictions are, update the model with the aim of generating better predictions next time. This process is repeated a number of times. During this training loop, metrics are reported which let the human training the model evaluate how well the model is doing.
+Un résumé abstrait de la boucle  d'entraînement pour l'apprentissage supervisé serait donc : commencer avec des images et des étiquettes, effectuer une préparation pour rendre l'entrée adaptée à un modèle d'apprentissage profond, passer les données à travers le modèle, faire des prédictions pour les étiquettes, calculer à quel point les prédictions sont erronées, mettre à jour le modèle dans le but de générer de meilleures prédictions la prochaine fois. Ce processus est répété un certain nombre de fois. Au cours de cette boucle d'apprentissage, des mesures sont communiquées pour permettre à l'utilisateur du modèle d'évaluer l'efficacité de ce dernier.
 
-This is obviously a high-level summary. Let's look at each step in the training loop one at a time. Although the next section will show these steps using code, don't worry too much if it doesn't all sink in at first.
+Il s'agit évidemment d'une vue synthétique. Examinons une à une les étapes de cette boucle. Bien que la section suivante présente ces étapes à l'aide de code, ne vous inquiétez pas si tout n'est pas clair au début.
 
-## Input Data
+## Données d'entrée
 
-Starting with the inputs, we have images and labels. Although deep learning takes some inspiration from how human cognition works, the way a computer 'sees' is very different from a human. All deep learning models take numbers as inputs. Since images are stored on a computer as a matrix of pixel values, this process is relatively simple for computer vision models. Alongside these images, we have a label(s) associated with each image. Again, these are represented as numbers inside the model.
+Pour ce qui est des entrées, nous disposons d'images et d'étiquettes. Bien que l'apprentissage profond s'inspire du fonctionnement de la cognition humaine, la façon dont un ordinateur "voit" est très différente de celle d'un être humain. Tous les modèles d'apprentissage profond prennent des nombres en entrée. Les images étant stockées sur un ordinateur sous la forme d'une matrice de valeurs de pixels, ce processus est relativement simple pour les modèles de vision par ordinateur. Parallèlement à ces images, nous avons une ou plusieurs étiquettes associées à chaque image. Là encore, ces étiquettes sont représentées sous forme de nombres dans le modèle.
 
-### How Much Data?
+
+### Combien de données ?
 
 It is often believed that you need huge amounts of data to train a useful deep learning model, however, this is not always the case. We assume that if you are trying to use deep learning to solve a problem, you have enough data to justify not using a manual approach. The real problem is the amount of labelled data you have. It is not possible to give a definitive answer to "how much data?", since the amount of training data required is dependent on a broad range of factors. There are a number of things which can be done to reduce the amount of training data required, some of which we will cover in this lesson.
 
