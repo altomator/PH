@@ -116,7 +116,6 @@ Kaggle dispose d'une [documentation sur l'utilisation de ses carnets](https://pe
 Si vous ne souhaitez pas utiliser une configuration dans le cloud, vous pouvez suivre les [instructions de configuration locale de cette leçon](https://perma.cc/7WC9-VAC2).
 
 
-
 # Courte introduction à l'apprentissage machine
 
 Avant de passer au premier exemple pratique, il peut être utile de rappeler brièvement ce que l'on entend par «&#xA0;apprentissage automatique&#xA0;». [L'apprentissage automatique](https://perma.cc/V3DM-E8SF) vise à permettre aux ordinateurs d'«&#xA0;apprendre&#xA0;» à partir de données au lieu d'être explicitement programmés pour faire quelque chose. Par exemple, si nous voulons filtrer les [spams](https://perma.cc/F7ZW-52YR), nous pouvons adopter plusieurs approches différentes. L'une d'elles consiste à lire des exemples de courriels «&#xA0;spam&#xA0;» et «&#xA0;non spam&#xA0;» pour voir si nous pouvons identifier des [signaux](https://perma.cc/NE75-DHCX) indiquant qu'un courriel est un spam. À cet effet, nous pourrions par exemple trouver des mots-clés qui, selon nous, sont susceptibles d'indiquer un spam. Nous pourrions ensuite écrire un programme qui ferait quelque chose comme ceci pour chaque courriel reçu :
@@ -180,8 +179,6 @@ La bibliothèque fastai a été choisie pour ce tutoriel pour plusieurs raisons 
 - De nombreuses bonnes pratiques sont mises en œuvre par "défaut", ce qui permet d'obtenir de bons résultats.
 - Il existe différents niveaux d'interaction avec la bibliothèque, en fonction de l'importance des modifications à apporter aux détails de niveau inférieur.
 - La bibliothèque s'appuie sur [PyTorch](https://perma.cc/U5US-FLSV), ce qui facilite l'utilisation du code existant.
-
-Although this tutorial focuses on fastai, many of the techniques shown are applicable across other frameworks too.
 
 Bien que ce tutoriel se concentre sur fastai, de nombreuses techniques présentées sont également applicables à d'autres frameworks IA.
 
@@ -488,15 +485,17 @@ Dans la prochaine partie de cette leçon, nous nous appuierons sur ces fondament
 
 
 
-# Appendix: A Non-Scientific Experiment Assessing Transfer Learning
+# Annexe : Une expérience non scientifique pour évaluer l'apprentissage par transfert
 
-The use of deep learning in the context of working with heritage data has not been extensively researched. It is therefore useful to 'experiment' and validate whether a particular technique is effective. For example, let's see if transfer learning will prove to be helpful when training a model to classify nineteenth century newspaper adverts into two categories: those containing images and those without images. To do this, we'll create a new `learner` with the same parameters as before but with the `pretrained` flag set to `False`. This flag tells fastai not to use transfer learning. We'll store this in a variable `learn_random_start`.
+L'utilisation de l'apprentissage profond dans le contexte d'un travail avec des données patrimoniales n'a pas fait l'objet de recherches approfondies. Il est donc utile d'expérimenter et de valider l'efficacité d'une technique particulière. Par exemple, voyons si l'apprentissage par transfert s'avère utile pour entraîner un modèle permettant de classer les annonces de journaux du XIXe siècle en deux catégories : celles qui contiennent des images et celles qui n'en contiennent pas. Pour ce faire, nous allons créer un nouveau `learner` avec les mêmes paramètres que précédemment mais avec l'option `pretrained` fixée à `False`. Ce drapeau indique à fastai de ne pas utiliser l'apprentissage par transfert. Nous le stockons dans la variable `learn_random_start`.
+
 
 ```python
 learn_random_start = cnn_learner(ad_data, resnet18, metrics=accuracy, pretrained=False)
 ```
 
-Now that we have created a new learner, we'll use the same `fine_tune` method as before and train for the same number of `epochs` as last time.
+Maintenant que nous avons créé un nouvel learner, nous allons utiliser la même méthode `fine_tune` que précédemment et entraîner pour le même nombre d'`epochs` que la dernière fois.
+
 
 ```python
 learn_random_start.fine_tune(5)
@@ -572,7 +571,7 @@ learn_random_start.fine_tune(5)
   </tbody>
 </table>
 
-The best acurracy score we achieve when we randomly initialise the weights is ~90%. In comparison, if we go back to our original model, which is stored in a variable `learn`, and use the `validate()` method, we get the metrics (in this case accuracy) calculated on the validation set:
+Le meilleur score de précision que nous obtenons lorsque nous initialisons les poids de manière aléatoire est de ~90%. En comparaison, si nous retournons à notre modèle original, qui est stocké dans une variable `learn`, et utilisons la méthode `validate()`, nous obtenons les métriques (dans ce cas la précision) calculées sur l'ensemble de validation :
 
 ```python
 learn.validate()
@@ -585,7 +584,7 @@ learn.validate()
 
 We see that there is a fairly big difference between the two models' performance. We kept everything the same except the `pretrained`flag, which we set to `False`. This flag determines if the model starts from the weights learned from training on ImageNet or starts from 'random' weights.[^12] This doesn't conclusively prove that transfer learning works, but it does suggest a sensible default for us to use.
 
-# Endnotes
+# Notes
 
 [^1]: Romein, C. Annemieke, Max Kemman, Julie M. Birkholz, James Baker, Michel De Gruijter, Albert Meroño‐Peñuela, Thorsten Ries, Ruben Ros, and Stefania Scagliola. ‘State of the Field: Digital History’. History 105, no. 365 (2020): 291–312. [https://doi.org/10.1111/1468-229X.12969](https://doi.org/10.1111/1468-229X.12969).
 
@@ -597,7 +596,7 @@ We see that there is a fairly big difference between the two models' performance
 
 [^5]: Jo, Eun Seo, and Timnit Gebru. ‘Lessons from Archives: Strategies for Collecting Sociocultural Data in Machine Learning’. In Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency, 306–316. FAT\* ’20. New York, NY, USA: Association for Computing Machinery, 2020. [https://doi.org/10.1145/3351095.3372829](https://doi.org/10.1145/3351095.3372829).
 
-[^6]: These annotations include a 'bounding box' around images, along with information about the type of image is contained within that bounding box. This object detection model was trained on this data and subsequently used to make predictions across the whole Chronicling America collection. The model extracts images from the page and classifies them into _one_ of seven categories. Lee, Benjamin Charles Germain, Jaime Mears, Eileen Jakeway, Meghan Ferriter, Chris Adams, Nathan Yarasavage, Deborah Thomas, Kate Zwaard, and Daniel S. Weld. ‘The Newspaper Navigator Dataset: Extracting And Analyzing Visual Content from 16 Million Historic Newspaper Pages in Chronicling America’. ArXiv:2005.01583 [Cs], 4 May 2020. [https://doi.org/10.48550/arXiv.2005.01583](https://doi.org/10.48550/arXiv.2005.01583).
+[^6]: Ces annotations comprennent une "boîte englobantes" autour des images, ainsi que des informations sur le type d'image contenu dans cette boîte. Ce modèle de détection d'objets a été entraîné sur ces données et a ensuite été utilisé pour faire des prédictions sur l'ensemble de la collection Chronicling America. Le modèle extrait les images de la page et les classe dans une parmi sept catégories. Lee, Benjamin Charles Germain, Jaime Mears, Eileen Jakeway, Meghan Ferriter, Chris Adams, Nathan Yarasavage, Deborah Thomas, Kate Zwaard, and Daniel S. Weld. ‘The Newspaper Navigator Dataset: Extracting And Analyzing Visual Content from 16 Million Historic Newspaper Pages in Chronicling America’. ArXiv:2005.01583 [Cs], 4 May 2020. [https://doi.org/10.48550/arXiv.2005.01583](https://doi.org/10.48550/arXiv.2005.01583).
 
 [^7]: Arizona republican. [volume] (Phoenix, Ariz.) 1890-1930, March 29, 1895, Page 7, Image 7. Image provided by Arizona State Library, Archives and Public Records; Phoenix, AZ. [https://chroniclingamerica.loc.gov/lccn/sn84020558/1895-03-29/ed-1/seq-7/](https://perma.cc/M5G5-CRDK).
 
@@ -605,8 +604,8 @@ We see that there is a fairly big difference between the two models' performance
 
 [^9]: Howard, Jeremy, and Sylvain Gugger. ‘Fastai: A Layered API for Deep Learning’. Information 11, no. 2 (16 February 2020): 108. [https://doi.org/10.3390/info11020108](https://doi.org/10.3390/info11020108).
 
-[^10]: Using 'star imports' is generally discouraged in Python. However, fastai uses [`__all__`](https://perma.cc/3GHR-V8RN) to provide a list of packages that should be imported when using star import. This approach is useful for exploratory work but you may still want to change your imports to be more explicit.
+[^10]: Using 'star imports' est généralement déconseillé en Python. Cependant, fastai utilise [`__all__`](https://perma.cc/3GHR-V8RN) pour fournir une liste de packages qui devraient être importés lors de l'utilisation de l'import étoile. Cette approche est utile pour les travaux exploratoires, mais il se peut que vous souhaitiez modifier vos importations pour qu'elles soient plus explicites.
 
-[^11]: Neural Networks are able to theoretically approximate any function. The mathematical proof of this exists in a number of forms under the heading of the ["Universal Approximation theorem"](https://perma.cc/2J3Q-PDTC). These proofs are not things you will need to know to practically use deep learning. However, if you are interested, a good overview of the idea can be found in a [YouTube video](https://youtu.be/Ijqkc7OLenI).
+[^11]: Les réseaux neuronaux sont théoriquement capables d'approximer n'importe quelle fonction. La preuve mathématique de cette capacité existe sous plusieurs formes, sous le nom de ["théorème d'approximation universelle"](https://perma.cc/2J3Q-PDTC). Ces preuves ne font pas partie des éléments que vous aurez besoin de connaître pour utiliser l'apprentissage profond dans la pratique. Toutefois, si vous êtes intéressé, vous trouverez un bon aperçu de l'idée dans cette [vidéo YouTube](https://youtu.be/Ijqkc7OLenI).
 
-[^12]: This initialisation isn't actually random in the fastai framework, and instead uses [Kaiming initialization](https://perma.cc/2Y74-MB47). 
+[^12]: Cette initialisation n'est pas réellement aléatoire dans le framework fastai, et utilise à la place [l'initialisation Kaiming](https://perma.cc/2Y74-MB47). 
