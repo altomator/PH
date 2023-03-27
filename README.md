@@ -403,30 +403,32 @@ Lorsque nous utilisons l'apprentissage profond, il n'est généralement pas poss
 
 La raison pour laquelle nous utilisons un GPU pour entraîner notre modèle est qu'il sera presque toujours plus rapide d'entraîner un modèle sur un GPU que sur un CPU en raison de sa capacité à effectuer de nombreux calculs en parallèle. 
 
-Avant de créer un lot et de le charger sur le GPU, nous devons généralement nous assurer que les images ont toutes la même taille. Cela permet au GPU d'exécuter les opérations de manière efficace. Une fois qu'un lot a été préparé, nous pouvons vouloir effectuer quelques transformations supplémentaires sur nos images afin de réduire la quantité de données d'entraînement nécessaires.
+Avant de créer un lot et de le charger sur le GPU, nous devons généralement nous assurer que les images ont toutes la même taille. Cela permet au GPU d'exécuter les opérations de manière efficace. Une fois qu'un lot a été préparé, nous pouvons vouloir effectuer certaines autres transformations supplémentaires sur nos images afin de réduire la quantité de données d'entraînement nécessaires.
 
 
-## Creating a Model
+## Créer un modèle
 
-Once we have prepared data so it can be loaded one batch at a time, we pass it to our model. We already saw one example of a model in our first example `resnet18`. A deep learning model architecture defines how data and labels are passed through a model. In this two-part lesson, we focus on a specific type of deep learning that uses 'Convolutional Neural Networks' (CNN).
+Une fois que nous avons préparé les données pour qu'elles puissent être chargées un lot à la fois, nous les passons à notre modèle. Nous avons déjà vu un exemple de modèle dans notre premier exemple, `resnet18`. L'architecture d'un modèle d'apprentissage profond définit la façon dont les données et les étiquettes sont transmises au modèle. Dans cette leçon en deux parties, nous nous concentrons sur un type spécifique d'apprentissage profond qui utilise les réseaux neuronaux convolutifs (CNN, *Convolutional Neural Networks*).
 
-{% include figure.html filename="3-layer-network.png" alt="A simplified diagram of a three layer neural network. The diagram shows an input image on the left moving through three layer of the neural network. Each layer has sections highlighted illustrating these areas being activated. The diagram then points to two images on representing an illustrated advert the other a text only advert. In this diagram the image shown has an illustration so the arrow pointing to the illustrated label is highlighted." caption="A three layer neural network" %}
+{% include figure.html filename="3-layer-network.png" alt="Schéma simplifié d'un réseau neuronal à trois couches. Le diagramme montre une image d'entrée à gauche se déplaçant à travers trois couches du réseau neuronal. Chaque couche comporte des sections en surbrillance illustrant l'activation de ces zones. Le diagramme pointe ensuite vers deux images, l'une représentant une publicité illustrée et l'autre une publicité textuelle. Dans ce diagramme, l'image montrée comporte une illustration, la flèche pointant vers l'étiquette illustrée est donc mise en évidence." caption="Un réseau neuronal à trois couches" %}
 
-This diagram gives a crude overview of the different components of a CNN model. In this type of model, an image is passed through several layers, before predicting an output label for the image ('text only' in this diagram). The layers of this model are updated during training so that they "learn" which features of an image predict a particular label. So for example, the CNN we trained on adverts will update the parameters known as "weights" for each layer, which then produces a representation of the image that is useful for predicting whether an advert has an illustration or not.
+Ce diagramme donne une vue d'ensemble des différents composants d'un modèle CNN. Dans ce type de modèle, une image passe par plusieurs couches avant de prédire une étiquette de sortie pour l'image ("texte uniquement" dans ce diagramme). Les couches de ce modèle sont mises à jour au cours de l'entraînement afin qu'elles "apprennent" quelles caractéristiques d'une image permettent de prédire une étiquette particulière. Ainsi, par exemple, le CNN que nous avons entraîné sur les publicités mettra à jour les paramètres appelés "poids" pour chaque couche, qui produit alors une représentation de l'image utile pour prédire si une publicité comporte une illustration ou non.
 
-[Tensorflow playground](https://perma.cc/625S-TNS6) is a useful tool for helping to develop an intuition about how these layers capture different features of input data, and how these features, in turn, can be used to classify the input data in different ways.
+[Tensorflow playground](https://perma.cc/625S-TNS6) est un outil utile pour aider à développer une intuition sur la façon dont ces couches capturent différentes caractéristiques des données d'entrée, et comment ces caractéristiques, à leur tour, peuvent être utilisées pour classer les données d'entrée de différentes façons.
 
-The power in CNNs and deep learning comes from the ability of these layers to encode very complicated patterns in data.[^11] However, it can often be a challenge to update the weights effectively.
+La puissance des CNN et de l'apprentissage profond provient de la capacité de ces couches à coder des modèles très complexes dans les données[^11]. Cependant, il peut souvent être difficile de mettre à jour les poids de manière efficace.
 
-### Using an Existing Model?
 
-When considering how to create our model we have various options about what to use. One option is to use an existing model which has already been trained on a particular task. You might for example use the [YOLO](https://perma.cc/4BPF-LLQT) model. This model is trained to predict [bounding boxes](https://perma.cc/JT6Y-F2EF) for a number of different types of objects in an image. Although this could be a valid starting point, there are a number of limitations to this approach when working with historical material, or for humanities questions more broadly. Firstly, the data these models were trained on might be very different from the data you are using. This can impact your model's performance on your data and result in biases towards images in your data which are similar to the training data. Another issue is that if you use an existing model without any modification, you are restricted to identifying the labels the original model was trained on.
+### Utiliser un modèle existant ?
 
-Although it is possible to directly define a CNN model yourself by defining the layers you want your model architecture to include, this is usually not where you would start. It is often best to start with an existing model architecture. The development of new model architectures is an active area of research, with models proving to be well-suited for a range of tasks and data. Often, these models are then implemented by machine learning frameworks. For example, the [Hugging Face](https://perma.cc/D39N-DBK4) [Transformers library](https://perma.cc/QJ4P-8PHQ) implements many of the most popular model architectures. 
+Lorsque nous réfléchissons à la manière de créer notre modèle, plusieurs options s'offrent à nous. L'une d'entre elles consiste à utiliser un modèle préexistant qui aurait déjà été entraîné à une tâche particulière. Vous pouvez par exemple utiliser le modèle [YOLO](https://perma.cc/4BPF-LLQT). Ce modèle a été entraîné à prédire les [boîtes englobantes](https://perma.cc/JT6Y-F2EF) pour un certain nombre de types d'objets différents dans une image. Bien qu'il puisse s'agir d'un point de départ valable, cette approche présente un certain nombre de limites lorsqu'il s'agit de travailler avec des contenus historiques ou, plus généralement, avec des questions relatives aux sciences humaines. Tout d'abord, les données sur lesquelles ces modèles ont été entraînés peuvent être très différentes de celles que vous utilisez. Cela peut avoir un impact sur les performances de votre modèle sur vos données et conduire à des biais en faveur des images de vos données qui sont similaires aux données d'apprentissage. Un autre problème est que si vous utilisez un modèle existant sans aucune modification, vous êtes limité à utiliser les seules étiquettes sur lesquelles le modèle original a été entraîné.
 
-Often, we want a balance between starting from scratch and leveraging existing models. In this two-part lesson, we show an approach which uses existing model architectures but modifies the model slightly to allow it to predict new labels. This model is then trained on new data so it becomes better suited to the task we want it to perform. This is a technique known as ['transfer learning'](https://perma.cc/62A8-5PZ8) which will be explored in the [appendix](#appendix-a-non-scientific-experiment-assessing-transfer-learning) section of this lesson.
+Bien qu'il soit possible de définir directement un modèle CNN en choisissant les couches que vous souhaitez inclure dans l'architecture de votre modèle, ce n'est généralement pas par là qu'il faut commencer. Il est souvent préférable de commencer par une architecture de modèle existante. Le développement de nouvelles architectures de modèles est un domaine de recherche actif, certains modèles s'avérant bien adaptés à une série de tâches et de données. Souvent, ces modèles sont ensuite mis en œuvre par des frameworks d'apprentissage machine. Par exemple, la bibliothèque [Transformers library](https://perma.cc/QJ4P-8PHQ) de [Hugging Face](https://perma.cc/D39N-DBK4) met en œuvre un grand nombre des architectures de modèles les plus populaires. 
 
-## Training
+Souvent, nous souhaitons trouver un équilibre entre partir de zéro et exploiter les modèles existants. Dans cette leçon en deux parties, nous présentons une approche qui utilise des architectures de modèles existantes mais modifie légèrement le modèle pour lui permettre de prédire de nouvelles étiquettes. Ce modèle est ensuite entraîné sur de nouvelles données afin d'être mieux adapté à la tâche que nous voulons lui confier. Il s'agit d'une technique connue sous le nom d'[apprentissage par transfert](https://perma.cc/62A8-5PZ8) (ou *transfert learning*) qui sera explorée dans l'[annexe](#appendix-a-non-scientific-experiment-assessing-transfer-learning) de cette leçon.
+
+
+## Entraînement
 
 Once a model has been created and data prepared, the training process can begin. Let's look at the steps of a training loop:
 
@@ -471,16 +473,20 @@ It is important to develop a sense of what happens when you make changes to the 
 
 If something 'breaks', don't worry! You can return to the original notebook to get back to a working version of the code. In the next part of the lesson, the components of a deep learning pipeline will be covered in more detail. Investigating what happens when you make changes will be an important part of learning how to train a computer vision model.
 
-# Part One Conclusion
 
-In this lesson we:
+# Partie I : conclusion
 
-- Gave a high-level overview of the distinction between rule-based and machine learning-based approaches to tackling a problem.
-- Showed a basic example of how to use fastai to create an image classifier with relatively little time and training data.
-- Presented an overview of the steps of a deep learning pipeline and identified points in this pipeline where humanities scholars should pay particular attention.
-- Ran a crude experiment to try and verify if transfer learning is useful for our computer vision classifier.
+Dans cette leçon, nous avons :
 
-In the next part of this lesson, we will build on these points and dive into more detail.
+- donné un aperçu général de la distinction entre les approches basées sur les règles et les approches basées sur l'apprentissage machine pour aborder un problème.
+- montré un exemple de base sur la façon d'utiliser fastai pour créer un classifieur d'images avec relativement peu de temps et de données d'apprentissage.
+- présenté une vue d'ensemble des étapes d'un pipeline d'apprentissage profond et identifié les étapes de ce pipeline où les chercheurs en sciences humaines devraient porter une attention particulière.
+- réaliser une expérience rudimentaire pour essayer de vérifier si l'apprentissage par transfert est utile pour notre classifieur.
+
+Dans la prochaine partie de cette leçon, nous nous appuierons sur ces fondamentaux et entrerons dans plus de détails.
+
+
+
 
 # Appendix: A Non-Scientific Experiment Assessing Transfer Learning
 
