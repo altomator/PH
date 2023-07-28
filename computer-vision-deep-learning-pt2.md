@@ -37,7 +37,10 @@ doi: 10.46430/phen0102
 
 # Introduction 
 
-This is the second part of a two-part lesson. This lesson seeks to build on the concepts introduced in [Part 1](/en/lessons/computer-vision-deep-learning-pt1) of this lesson. 
+Il s'agit de la seconde partie d'une leçon en deux parties. Cette leçon vise à développer les concepts introduits dans la [Partie 1](/fr/lessons/computer-vision-deep-learning-pt1) de cette leçon.
+
+
+
 ## Lesson aims
 
 In this part, we will go deeper into the topic by:
