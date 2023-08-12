@@ -51,7 +51,7 @@ Dans cette partie, nous allons approfondir le sujet :
 
 - en présentant l'augmentation des données comme un outil permettant de réduire la quantité de données d'entraînement dont vous avez besoin pour entraîner un modèle d'apprentissage automatique ;
   
-- en explorer comment nous pouvons identifier les points faibles d'un modèle. 
+- en explorant comment nous pouvons identifier les points faibles d'un modèle. 
 
 Cette leçon mettra particulièrement l'accent sur la façon dont le caractère flou des concepts peut se traduire &mdash; ou ne pas se traduire &mdash; dans les modèles d'apprentissage automatique. L'utilisation de l'apprentissage automatique pour des tâches de recherche impliquera la mise en correspondance de catégories et de concepts désordonnés et complexes avec un ensemble d'étiquettes pouvant être utilisées pour entraîner des modèles d'apprentissage automatique. Ce processus peut poser des problèmes, dont certains seront abordés au cours de cette leçon. 
 
