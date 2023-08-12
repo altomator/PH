@@ -37,22 +37,26 @@ doi: 10.46430/phen0102
 
 # Introduction 
 
-Il s'agit de la seconde partie d'une leçon en deux parties. Cette leçon vise à développer les concepts introduits dans la [Partie 1](/fr/lessons/computer-vision-deep-learning-pt1) de cette leçon.
+Il s'agit de la seconde partie d'une leçon en deux parties. Cette leçon vise à développer les concepts introduits dans la [Partie 1](/fr/lessons/computer-vision-deep-learning-pt1).
 
 
 
-## Lesson aims
+## Objectifs de la leçon
 
-In this part, we will go deeper into the topic by:
+Dans cette partie, nous allons approfondir le sujet :
 
-- Outlining the importance of understanding the data being used to train a model and some possible ways to assess this. 
-- Developing an understanding of how different metrics tell you different stories about how your model is performing. 
-- Introducing data augmentation as one tool for reducing the amount of training data you need for training a machine learning model.
-- Exploring how we can identify where a model is performing poorly. 
+- en soulignant l'importance de la compréhension des données utilisées pour entraîner un modèle et en présentant quelques méthodes d'évaluation possibles ;
 
-A particular focus of this lesson will be on how the fuzziness of concepts can translate &mdash;or fail to translate&mdash; into machine learning models. Using machine learning for research tasks will involve mapping messy and complex categories and concepts onto a set of labels that can be used to train machine learning models. This process can cause challenges, some of which we'll touch on during this lesson. 
+- en étudiant la façon dont les différentes métriques vous donnent des informations différentes sur les performances de votre modèle ;
 
-## Lesson Set-Up
+- en présentant l'augmentation des données comme un outil permettant de réduire la quantité de données d'entraînement dont vous avez besoin pour entraîner un modèle d'apprentissage automatique ;
+  
+- en explorer comment nous pouvons identifier les points faibles d'un modèle. 
+
+Cette leçon mettra particulièrement l'accent sur la façon dont le caractère flou des concepts peut se traduire &mdash; ou ne pas se traduire &mdash; dans les modèles d'apprentissage automatique. L'utilisation de l'apprentissage automatique pour des tâches de recherche impliquera la mise en correspondance de catégories et de concepts désordonnés et complexes avec un ensemble d'étiquettes pouvant être utilisées pour entraîner des modèles d'apprentissage automatique. Ce processus peut poser des problèmes, dont certains seront abordés au cours de cette leçon. 
+
+
+## Configuration de la leçon
 
 We assume you have already done [Part 1](/en/lessons/computer-vision-deep-learning-pt1), which includes setup instructions. You can find the notebook version of this lesson on [Kaggle](https://perma.cc/9H6M-PDB6). Please see Part 1 of the lesson for more information on setting up and use this [Kaggle notebook](https://www.kaggle.com/davanstrien/02-programming-historian-deep-learning-pt2-ipynb).
 
