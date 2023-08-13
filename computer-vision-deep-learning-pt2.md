@@ -58,16 +58,15 @@ Cette leçon mettra particulièrement l'accent sur la façon dont le caractère 
 
 ## Configuration de la leçon
 
-We assume you have already done [Part 1](/en/lessons/computer-vision-deep-learning-pt1), which includes setup instructions. You can find the notebook version of this lesson on [Kaggle](https://perma.cc/9H6M-PDB6). Please see Part 1 of the lesson for more information on setting up and use this [Kaggle notebook](https://www.kaggle.com/davanstrien/02-programming-historian-deep-learning-pt2-ipynb).
 
 Nous supposons que vous avez déjà suivi la [Partie 1](/fr/lessons/computer-vision-deep-learning-pt1), qui comprend les instructions de configuration. Vous pouvez trouver la version carnet (*notebook*) de cette leçon sur [Kaggle](https://perma.cc/9H6M-PDB6). Veuillez consulter la première partie de la leçon pour plus d'informations sur la configuration et l'utilisation de ce [carnet Kaggle](https://www.kaggle.com/davanstrien/02-programming-historian-deep-learning-pt2-ipynb).
 
 
-## Le pipeline d'apprentissage machine 
+## Le pipeline d'apprentissage profond 
 
-Dans la partie 1, nous avons présenté le processus de création d'un modèle de classificateur d'images et examiné certaines des étapes clés du pipeline d'apprentissage profond. Dans cette leçon, nous passerons en revue et renforcerons les concepts clés de la partie 1, puis nous identifierons plus précisément les étapes de création d'un modèle d'apprentissage profond, de l'exploration des données à l'entraînement du modèle. 
+Dans la partie 1, nous avons présenté le processus de création d'un modèle de classification d'images et examiné certaines des étapes clés du pipeline d'apprentissage profond. Dans cette leçon, nous passerons en revue et renforcerons les concepts clés de la partie 1, puis nous identifierons plus précisément les étapes de création d'un modèle d'apprentissage profond, de l'exploration des données à l'entraînement du modèle. 
 
-Pour rappel, nous pouvons considérer le processus de création d'un modèle d'apprentissage profond comme un pipeline d'étapes connexes. Dans cette leçon, nous allons parcourir ce pipeline étape par étape :
+Pour rappel, nous pouvons considérer le processus de création d'un modèle d'apprentissage profond comme un pipeline d'étapes reliées. Dans cette leçon, nous allons parcourir ce pipeline étape par étape :
 
 
 
