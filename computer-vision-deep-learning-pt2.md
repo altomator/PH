@@ -70,11 +70,7 @@ Pour rappel, nous pouvons considérer le processus de création d'un modèle d'a
 
 
 
-In Part 1, we introduced the process of creating an image classifier model and looked at some of the key steps in the deep learning pipeline. In this lesson, we will review and reinforce key concepts from Part 1 and then further identify steps for creating a deep-learning model, from exploring the data to training the model. 
-
-As a reminder, we can think of the process of creating a deep learning model as a pipeline of related steps. In this lesson we will move through this pipeline step by step:
-
-{% include figure.html filename="deep-learning-pipeline-simple.png" alt="A diagram showing a workflow of a machine learning pipeline. The pipeline contains three boxes, 'data preparation', 'deep learning' and 'analysis'. An arrow moves across these three boxes. Within the 'data preparation' box are three boxes from left to right: 'sampling', 'labels', 'annotation'. For the box 'deep learning' there are three smaller boxes with arrows moving between them: 'training data', 'model', 'predictions'. The box 'analysis' contains three smaller boxes 'metrics' and 'interpretation'." caption="A high-level illustration of a supervised machine learning pipeline" %}
+{% include figure.html filename="deep-learning-pipeline-simple.png" alt="Diagramme illustrant le flux de travail d'un pipeline d'apprentissage machine. Le pipeline contient trois cases : 'préparation des données', 'apprentissage profond' et 'analyse'. Une flèche relie ces trois cases. La boîte 'préparation des données' comprend trois boîtes, de gauche à droite : 'échantillonnage', 'étiquettes' et 'annotation'. Pour la case 'apprentissage profond', il y a trois cases plus petites avec des flèches qui se déplacent entre elles : 'données d'entraînement', 'modèle', 'prédictions'. La case 'analyse' contient deux cases plus petites : 'métriques' et 'interprétation'." caption="Une illustration synthétique d'un pipeline d'apprentissage machine supervisé" %}
 
 # The Data
 
