@@ -72,9 +72,10 @@ Pour rappel, nous pouvons considérer le processus de création d'un modèle d'a
 
 {% include figure.html filename="deep-learning-pipeline-simple.png" alt="Diagramme illustrant le flux de travail d'un pipeline d'apprentissage machine. Le pipeline contient trois cases : 'préparation des données', 'apprentissage profond' et 'analyse'. Une flèche relie ces trois cases. La boîte 'préparation des données' comprend trois boîtes, de gauche à droite : 'échantillonnage', 'étiquettes' et 'annotation'. Pour la case 'apprentissage profond', il y a trois cases plus petites avec des flèches qui se déplacent entre elles : 'données d'entraînement', 'modèle', 'prédictions'. La case 'analyse' contient deux cases plus petites : 'métriques' et 'interprétation'." caption="Une illustration synthétique d'un pipeline d'apprentissage machine supervisé" %}
 
-# The Data
+# Les données
 
-We will again work with the [Newspaper Navigator](https://perma.cc/8U7H-9NUS) dataset. However, this time the images will be those predicted as photos. These photos are sampled from 1895 to 1920. For a fuller overview of the 'arcaeology' of this dataset, see Benjamin Lee's discussion.[^1]
+Nous travaillerons à nouveau avec le jeu de données [Newspaper Navigator](https://perma.cc/8U7H-9NUS). Cependant, cette fois-ci, les images seront celles prédites en tant que photos par le modèle. Ces photos sont échantillonnées entre 1895 et 1920. Pour un aperçu plus complet de l'"archéologie" de ce jeu de données, voir cet article de Benjamin Lee[^1].
+
 
 ## Wrangling Data with Errors
 
