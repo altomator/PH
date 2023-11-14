@@ -77,13 +77,13 @@ Pour rappel, nous pouvons considérer le processus de création d'un modèle d'a
 Nous travaillerons à nouveau avec le jeu de données [Newspaper Navigator](https://perma.cc/8U7H-9NUS). Cependant, cette fois-ci, les images seront celles prédites en tant que photos par le modèle. Ces photos sont échantillonnées entre 1895 et 1920. Pour un aperçu plus complet de l'"archéologie" de ce jeu de données, voir cet article de Benjamin Lee[^1].
 
 
-## Wrangling Data with Errors
+## Traiter des données comportant des erreurs
 
-It is important to understand the data you are working with as a historian applying deep learning. Since the data from Newspaper Navigator is predicted by a machine learning model, it will contain errors. The project page for Newspaper Navigator prominently shares an "Average Precision" metric for each category:
+Il est important de comprendre les données avec lesquelles vous travaillez en tant qu'historien utilisant l'apprentissage profond. Étant donné que les données de Newspaper Navigator sont prédites par un modèle d'apprentissage automatique, elles contiennent des erreurs. La page du projet Newspaper Navigator met en évidence une mesure de "précision moyenne" pour chaque catégorie :
 
 <div class="table-wrapper" markdown="block">
   
-| Category          | Average Precision | # in Validation Set |
+| Catégorie          | Précision moyenne | # dans le jeu de validation |
 |-------------------|-------------------|---------------------|
 | Photograph        | 61.6%             | 879                 |
 | Illustration      | 30.9%             | 206                 |
@@ -96,7 +96,8 @@ It is important to understand the data you are working with as a historian apply
 
 </div>
 
-We'll look more closely at metrics [later in this lesson](#choosing-a-metric). For now, we can note that the errors will include visual material which has been missed by the model, as well as images which have been given an incorrect category, i.e., a photograph classified as an illustration. For average precision, the higher the number, the better the score. The average precision score varies across image type with some classes of image performing better than others. The question of what is 'good enough' will depend on intended use. Working with errors is usually a requirement of working with machine learning, since most models will produce some errors. It is helpful that the performance of the model is shared in the [GitHub repository](https://perma.cc/CFT7-RUJR). This is something we will also want to do when we share data or research findings generated via machine learning methods. 
+Nous examinerons de plus près les métriques [plus loin dans cette leçon](#choosing-a-metric). Pour l'instant, nous pouvons noter que les erreurs seront liées à des contenus visuels n'ayant pas été pris en compte par le modèle ou par des images incorrectement classées, par exemple une photographie classée comme une illustration. En ce qui concerne la précision moyenne, plus le chiffre est élevé, meilleur est le score. La précision moyenne varie en fonction du type d'image, certaines catégories d'images étant plus performantes que d'autres. La question de savoir ce qui est "suffisamment bon" dépend de l'utilisation prévue. Composer avec ces erreurs est généralement une exigence de l'apprentissage automatique, puisque la plupart des modèles produisent des erreurs. Il est utile que les performances du modèle soient partagées dans le [dépôt GitHub](https://perma.cc/CFT7-RUJR). C'est une bonne pratique que nous appliquerons également  lorsque nous partagerons des données ou des résultats de recherche générés par des méthodes d'apprentissage automatique. 
+
 
 ## Classifying and Labelling models
 
