@@ -113,15 +113,13 @@ Vous pouvez également vouloir faciliter la recherche des photos de certaines pe
 
 Le choix entre un modèle qui effectue une classification et un modèle qui attribue des étiquettes doit être envisagé en fonction du rôle de votre modèle. Vous trouverez une discussion plus détaillée sur les différences entre ces approches dans ce [billet de blog](https://perma.cc/KL6V-CY6S). Il est important de se rappeler qu'un modèle fait des prédictions avant de décider de l'action à entreprendre (le cas échéant) sur la base de ces prédictions. 
 
+## Examiner les données de plus près
 
-## Looking More Closely at the Data
+Nous devons comprendre nos données avant d'essayer de les utiliser dans un processus d'apprentissage profond. Nous commençons par charger les données dans un `DataFrame` pandas. [pandas](https://perma.cc/CL9E-3DKK) est une bibliothèque Python utile pour travailler avec des données tabulaires, comme le type de données habituellement gérées par un tableur tel que [Excel](https://perma.cc/MVV3-976L). Comme il ne s'agit pas d'un tutoriel sur pandas, ne vous inquiétez pas si vous ne suivez pas tout le code dans la section ci-dessous. Si vous souhaitez en savoir plus sur pandas, vous pouvez consulter la leçon _Programming Historian_ ['Visualiser des données avec Bokeh et Pandas'](/fr/lessons/visualiser-avec-bokeh).  Des suggestions de ressources sont également incluses à la fin de cette leçon. 
 
-We should understand our data before trying to use it for deep learning. We'll start by loading the data into a pandas `DataFrame`. [pandas](https://perma.cc/CL9E-3DKK) is a Python library which is useful for working with tabular data, such as the type of data you may work with using a spreadsheet software such as [Excel](https://perma.cc/MVV3-976L). Since this isn't a tutorial on pandas, don't worry if you don't follow all of the pandas code in the section below. If you do want to learn more about pandas, you might want to look at the ['Visualizing Data with Bokeh and Pandas'](/en/lessons/visualizing-with-bokeh) _Programming Historian_ lesson.  Some suggested resources are also included at the end of this lesson. 
+L'objectif ici est d'utiliser pandas pour examiner certaines caractéristiques de ce jeu de données. Cette étape consistant à essayer de comprendre les données avant d'entraîner un modèle est souvent appelée ["analyse exploratoire des données"](https://perma.cc/4RVF-3LKQ) (AED, ou EDA, _exploratory data analysis_). 
 
-The aim here is to use pandas to take a look at some of the features of this dataset. This step of trying to understand the data with which you will be working before training a model is often referred to as ['exploratory data analysis'](https://perma.cc/4RVF-3LKQ) (EDA). 
-
-First we import the pandas library. By convention pandas is usually imported `as` pd.
-
+Nous commençons par importer la bibliothèque pandas. Par convention, pandas est généralement importé sous le nom de pd :
 
 ```python
 import pandas as pd
