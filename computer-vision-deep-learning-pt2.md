@@ -451,15 +451,15 @@ The code for loading from a `DataFrame` is fairly similar to the method we used 
 photo_data = ImageDataLoaders.from_df(
     df,  # le dataframe dans lequel sont stockés nos étiquettes et les chemins d'accès aux fichiers image
     folder="photo_data/images",  # le chemin du répertoire contenant les images
-    bs=32,  # the batch size (number of images + labels)
-    label_delim="|",  # the deliminator between each label in our label column
-    item_tfms=Resize(224),  # resize each image to 224x224
-    valid_pct=0.3,  # use 30% of the data as validation data
-    seed=42  # set a seed to make results more reproducible
+    bs=32,  # la taille du batch (nombre d'images + étiquettes)
+    label_delim="|",  # le délimiteur entre chaque étiquette dans notre colonne d'étiquettes
+    item_tfms=Resize(224),  # redimensionner chaque image à 224x224
+    valid_pct=0.3,  # utiliser 30 % des données comme données de validation
+    seed=42  # fixer une graine pour rendre les résultats plus reproductibles
 )
 ```
 
-## fastai DataLoaders
+## DataLoaders de fastai
 
 We have created a new variable using a method from `ImageDataLoaders` - let's see what this is. 
 
@@ -475,7 +475,7 @@ photo_data
 
 The `ImageDataLoaders.from_df` method produces something called `DataLoaders`. `DataLoaders` are how fastai prepares our input data and labels to a form that can be used as input for a computer vision model. It's beyond the scope of this lesson to fully explore everything this method does 'under the hood', but we will have a look at a few of the most important things it does in this section. 
 
-## Viewing our Loaded Data
+## Voir nos données chargées 
 
 In [Part 1](/en/lessons/computer-vision-deep-learning-pt1), we saw an example of `show_batch`. This method allows you to preview some of your data and labels. We can pass `figsize` to control how large our displayed images are. 
 
@@ -489,7 +489,7 @@ photo_data.show_batch(figsize=(15,15))
 
 You will see above that the labels are separated by a `;`. This means `fastai` has understood that the `|` symbol indicates different labels for each image. 
 
-## Inspecting Model Inputs
+## Inspecter les données d'entrée du modèle
 
 Our model takes labels and data as inputs. To help us better understand the deep learning pipeline, we can inspect these in more detail. We can access the `vocab` attribute of our data to see which labels our data contains. 
 
@@ -632,7 +632,7 @@ x.shape, y.shape
 
 This can be useful to verify that data looks as you would expect as well as a simple way of 'poking' around to see how data has been prepared for the model. Now that we have a better understanding of what our data looks like, we'll examine some potential ways to maximize our fairly modest dataset. 
 
-## Image Augmentations 
+## Augmentations d'image 
 
 Image augmentations are a type of [data augmentation](https://perma.cc/Y5AC-ZBSL) and represent one of the methods we can use to try to reduce the amount of training data required and prevent overfitting our model. As a reminder, overfitting occurs when the model gets very good at predicting the training data but doesn't generalise well to the validation data. Image augmentations are methods of artificially creating more training data. They work by transforming images with known labels in various ways, for example rotating an image. To the model, this image 'looks' different but you were able to generate this additional example without having to annotate more data. Looking at an example will help illustrate some of these augmentations.
 
@@ -677,7 +677,7 @@ The catch is that we usually want to try and use transformations that are actual
 We don't have space in this lesson to fully explore transformations. We suggest exploring different transformations <a href="https://perma.cc/A8K4-BJ5B">  available in the fastai library</a> and thinking about which transformations would be suitable for a particular type of image data. 
 </div>
 
-# Creating a Model
+# Créer un modèle 
 
 Now that we have loaded data, including applying some augmentations to the images, we are ready to create our model, i.e., moving to our training loop. 
 
@@ -709,7 +709,7 @@ Now that we have created our model and stored it in the variable `learn`, we can
 
 In a notebook, placing `?` in front of a library, method or variable will return the `Docstring`. This can be a useful way of accessing documentation. In this example, you will see that a learner groups our model, our data `dls` and a "loss function". Helpfully, fastai will often infer a suitable `loss_func` based on the data it is passed. 
 
-## Training the Model
+## Entraîner le modèle 
 
 The fastai `learner` contains some powerful functionalities to help train your model. One of these is the learning rate finder. A learning rate determines how aggressively we update our model after each batch. If the learning rate is too low, the model will only improve slowly. If the learning rate is too high, the loss of the model will go up, i.e., the model will get worse rather than better. fastai includes a method `lr_find` which helps with this process. Running this method will start a progress bar before showing a plot.
 
@@ -731,7 +731,7 @@ We want to pick a point where the loss is going down steeply, since this should 
 
 Picking a good learning rate is one of the important variables that you should try and control in the training pipeline. A useful exercise is to try out a range of different learning rates with the same model and data to see how it impacts the training of the model. 
 
-## Fitting the Model 
+## Ajuster le modèle 
 
 We are now ready to train our model. We previously used the `fine_tune` method, but we can also use other methods to train our model. In this example we will use a method called [`fit_one_cycle`](https://perma.cc/5Z9T-3GV4). This method implements an approach to training described in a [research paper](https://perma.cc/MSJ8-LYJD) that was found to improve how quickly a model trains. The fastai library implements many best practices in this way to make them easy to use. For now, we'll train the model for 5 epochs using a learning rate of 2e-2.
 
@@ -812,7 +812,7 @@ learn.recorder.plot_loss()
 
 Compared to our previous model, we are not getting a very good score. Let's see if "unfreezing" the model (updating the lower layers of the model) helps improve the performance.
 
-## Saving Progress
+## Sauvegarder les progrès
 
 Since training a deep learning model takes time and resources, it is prudent to save progress as we train our model, especially since it is possible to overfit a model or do something else which makes it perform more poorly than in previous epochs. To save the model, we can use the `save` method and pass in a `string` value to name this save point, allowing us to return to this point if we mess something up later on. 
 
@@ -827,7 +827,7 @@ learn.save('stage_1')
 ```
 
 
-## Unfreezing the Model
+## Dégeler le modèle
 
 Now that our progress has been saved, we can see if training the model's lower layers improves the model performance. We can unfreeze a model by using the `unfreeze` method on our `learner`. 
 
@@ -919,7 +919,7 @@ learn.fit_one_cycle(4, lr_max=slice(6e-6, 4e-4), cbs=[SaveModelCallback(monitor=
 Better model found at epoch 0 with f1_score value: 0.6308501468079952.
 ```
 
-# Investigating the Results of our Model 
+# Analyser les résultats de notre modèle 
 
 Looking back at the diagram above, we can see that we usually set up our model to provide some metrics for statistical performance. In this section, we'll provide some hints on how to inspect this information in more detail.  
 
@@ -959,7 +959,7 @@ y_pred[0]
 
 We have four values representing each of the potential labels in our dataset. Each value reflects a probability for a particular label. For a classification problem where there are clear categories, having a single class prediction is a useful feature of a model. However, if we have a set of labels or data which contain more ambiguity, then having the possibility to 'tune' the threshold of probability at which we assign a label could be helpful. For example, we might only use predictions for a label if a model is >80% certain of a possible label. There is also the possibility of trying to work directly with the predicted probabilities rather than converting them to labels. 
 
-## Exploring our Predictions Using Scikit-learn
+## Explorer nos prédictions à l'aide de scikit-learn
 
 Now that we have a set of predictions and actual labels, we could directly explore these using other tools. In this example we'll use [scikit-learn](https://perma.cc/X34X-PPEB), a Python library for machine learning. In particular we will use the metrics module to look at our results.
 
