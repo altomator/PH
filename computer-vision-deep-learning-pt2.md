@@ -269,9 +269,9 @@ Once we've done this, we can take a slice from this list to display a few exampl
 
 
 ```python
-# create a variable `labels` to store the list
+# créer une variable `labels` pour stocker la liste
 labels = df['label'].to_list() 
-# take a slice of this list to display
+# prendre un extrait de cette liste pour l'afficher
 labels[:6] 
 ```
 
@@ -285,7 +285,7 @@ Although we have the labels in a list, there are still items, such as ```'human|
 
 
 ```python
-# for each label in the list split on "|"
+# pour chaque étiquette de la liste, couper à "|"
 split_labels = [label.split("|") for label in labels] 
 ```
 
@@ -318,7 +318,7 @@ labels[:4]
 
 We now have a single list of individual labels. 
 
-## Counting the labels
+## Compter les étiquettes
 
 To get the frequencies of these labels, we can use the `Counter` class from the Python `Collections` module:
 
@@ -364,14 +364,14 @@ Although we have a sense of the labels already, visualising the labels may help 
 import matplotlib.pyplot as plt
 
 plt.bar(
-    label_freqs.keys(),  #pass in our labels 
-    list(map(lambda x: x / sum(label_freqs.values()), label_freqs.values())),  # normalised values
+    label_freqs.keys(),  # une passe dans nos étiquettes
+    list(map(lambda x: x / sum(label_freqs.values()), label_freqs.values())),  # valeurs normalisées
 )
-# add a title to the plot
+# ajouter un titre au graphe
 plt.title("Label frequencies")
-# add a y axis label
+# ajouter un titre à l'axe des y
 plt.ylabel("Percentage of total labels")
-plt.show()  # show the plot
+plt.show()  # afficher le graphe 
 ```
 
 {% include figure.html filename="label_freqs.png" alt="A diagram showing a bar chart with five bars. The first bar for human has a value just under 70%, human-structure is around 15%, the other labels representing 'animal', 'human-structure' and 'no-label' all have values below 10%" caption="Relative frequency of labels" %}
@@ -382,7 +382,7 @@ This plot shows the balance between different labels, including some photos whic
 
 Another challenge is how to evaluate the success of this model. In other words, which metric should we use?
 
-## Choosing a Metric
+## Choisir une métrique 
 
 In our previous ad classification dataset, `accuracy` was used as a measure. Accuracy can be shown as:
 
@@ -414,7 +414,7 @@ If we care about some compromise between the two, we could use F-Beta measure (s
 
 Remember, metrics don't *directly* impact the training process. The metric gives the human training the model feedback on how well it is doing, but it isn't used by the model to update the model weights. 
 
-# Loading Data
+# Charger les données  
 
 Now that we have a better understanding of the data, we can move to the next step: looking at how we can prepare data in a form that a deep learning model (in this case a computer vision model) can understand, with images and labels put into batches. 
 
@@ -449,8 +449,8 @@ The code for loading from a `DataFrame` is fairly similar to the method we used 
 
 ```python
 photo_data = ImageDataLoaders.from_df(
-    df,  # the dataframe where our labels and image file paths are stored
-    folder="photo_data/images",  # the path to the directory holding the images
+    df,  # le dataframe dans lequel sont stockés nos étiquettes et les chemins d'accès aux fichiers image
+    folder="photo_data/images",  # le chemin du répertoire contenant les images
     bs=32,  # the batch size (number of images + labels)
     label_delim="|",  # the deliminator between each label in our label column
     item_tfms=Resize(224),  # resize each image to 224x224
