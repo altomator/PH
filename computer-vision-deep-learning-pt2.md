@@ -644,14 +644,14 @@ tfms = setup_aug_tfms([Rotate(max_deg=90, p=0.75), Zoom(), Flip()])
 
 ```python
 photo_data = ImageDataLoaders.from_df(
-    df,  # dataframe containing paths to images and labels
-    folder="photo_data/images",  # folder where images are stored
-    bs=32,  # batch size
-    label_delim="|",  # the deliminator for multiple labels
-    item_tfms=Resize(224),  # resize images to a standard size
-    batch_tfms=[*tfms],  # pass in our transforms
-    valid_pct=0.3,  # 30% of data used for validation
-    seed=42,  # set a seed,
+    df,  # le dataframe vers nos étiquettes et chemins d'accès aux fichiers image
+    folder="photo_data/images",  # le dossier dans lequel les images sont stockées
+    bs=32,  # taille de batch
+    label_delim="|",  # le délimiteur pour les étiquettes multiples
+    item_tfms=Resize(224),  # redimensionner les images à une taille standard
+    batch_tfms=[*tfms],  # passer dans nos transformations
+    valid_pct=0.3,  # 30% des données utilisées pour la validation
+    seed=42,  # définir une graine
 )
 ```
 
